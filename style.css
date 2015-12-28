@@ -3,6 +3,10 @@
     position: absolute;
 }
 
+html {
+    height: 100vh;
+}
+
 body {
     background-image: url("http://stevejobsquotegenerator.com/steve-jobs.png");
     background-repeat: no-repeat;
