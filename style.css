@@ -156,6 +156,7 @@ body {
     cursor: default;
     margin-right: 6px;
     vertical-align: top;
+    font-size: 16px;
 }
 
 .quote_actions > .hidden {
@@ -215,7 +216,13 @@ body {
 }
 
 
-@media (min-width: 850px) {
+@media screen and (min-aspect-ratio: 1/1) {
+    #quote_container {
+        max-width: 60vw;
+        margin-top: 10vh;
+        font-size: 3vw;
+    }
+    
     #text {
         margin-left: 10%;
         font-size: 1.5em;
