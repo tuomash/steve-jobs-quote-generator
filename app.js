@@ -1,13 +1,13 @@
 "use strict";
 
 var MarkovTweet = function() {
-	this.table = [];
+  this.table = [];
 };
 
 MarkovTweet.prototype.addData = function(textArray) {
-	for (var index = 0; index < textArray.length; index++) {
-		this.addToChain(textArray[index]);
-	}
+  for (var index = 0; index < textArray.length; index++) {
+    this.addToChain(textArray[index]);
+  }
 }
 
 /**
@@ -16,21 +16,21 @@ MarkovTweet.prototype.addData = function(textArray) {
  * @param {String} token - A line of text to add to the chain
  */
 MarkovTweet.prototype.addToChain = function(token) {
-	var expression = /[\s]/;
-	var tokens = token.split(expression);
+  var expression = /[\s]/;
+  var tokens = token.split(expression);
 
-	for (var index = 0; index < tokens.length; index++) {
-		var currentToken = tokens[index].toLowerCase(),
-			nextToken = null;
+  for (var index = 0; index < tokens.length; index++) {
+    var currentToken = tokens[index].toLowerCase(),
+      nextToken = null;
 
-		if (index + 1 < tokens.length) {
-			nextToken  = tokens[index + 1].toLowerCase();
-		}
+    if (index + 1 < tokens.length) {
+      nextToken  = tokens[index + 1].toLowerCase();
+    }
 
-		if (currentToken !== "" && nextToken !==  null){
-			this.buildChain(currentToken, nextToken);
-		}
-	}
+    if (currentToken !== "" && nextToken !==  null){
+      this.buildChain(currentToken, nextToken);
+    }
+  }
 };
 
 
@@ -43,48 +43,48 @@ MarkovTweet.prototype.addToChain = function(token) {
  * @param  {String} nextToken    - The token found after the currentToken. Used to build out our map
  */
 MarkovTweet.prototype.buildChain = function(currentToken, nextToken) {
-	var found = false;
+  var found = false;
 
-	for (var index = 0; index < this.table.length; index++) {
-		var currentRow = this.table[index];
-		var currentKey = currentRow.key;
+  for (var index = 0; index < this.table.length; index++) {
+    var currentRow = this.table[index];
+    var currentKey = currentRow.key;
 
-		if (currentKey === currentToken) {
+    if (currentKey === currentToken) {
 
-			found = true;
-			var increased = false;
+      found = true;
+      var increased = false;
 
-			//Now check if the next token exists somewhere
-			for (var n = 0; n < currentRow.values.length; n++) {
-				if (currentRow.values[n].next === nextToken) {
-					currentRow.values[n].count++;
-					currentRow.total++;
-					increased = true;
-					break;
-				}
-			}
+      //Now check if the next token exists somewhere
+      for (var n = 0; n < currentRow.values.length; n++) {
+        if (currentRow.values[n].next === nextToken) {
+          currentRow.values[n].count++;
+          currentRow.total++;
+          increased = true;
+          break;
+        }
+      }
 
-			if (!increased) {
-				this.table[index].values.push({
-					"next": nextToken,
-					"count": 1
-				});
+      if (!increased) {
+        this.table[index].values.push({
+          "next": nextToken,
+          "count": 1
+        });
 
-				this.table[index].total++;
-			}
-		}
-	}
+        this.table[index].total++;
+      }
+    }
+  }
 
-	if (!found && nextToken !== "") {
-		this.table.push({
-			"key": currentToken,
-			"values": [{
-				"next": nextToken,
-				"count": 1
-			}],
-			"total": 1
-		});
-	}
+  if (!found && nextToken !== "") {
+    this.table.push({
+      "key": currentToken,
+      "values": [{
+        "next": nextToken,
+        "count": 1
+      }],
+      "total": 1
+    });
+  }
 };
 
 
@@ -93,52 +93,52 @@ MarkovTweet.prototype.buildChain = function(currentToken, nextToken) {
  * @return {String} - A string based on the Markov Chain.
  */
 MarkovTweet.prototype.buildTweet = function() {
-	var random = Math.floor(Math.random() * this.table.length);
-	var tweet = this.table[random].key;
-	var nextState = this.addToTweet(random);
-	tweet += " " + nextState;
+  var random = Math.floor(Math.random() * this.table.length);
+  var tweet = this.table[random].key;
+  var nextState = this.addToTweet(random);
+  tweet += " " + nextState;
 
-	while (tweet.length < 200) {
-		var selection = this.findIndex(nextState);
-		nextState = this.addToTweet(selection);
+  while (tweet.length < 200) {
+    var selection = this.findIndex(nextState);
+    nextState = this.addToTweet(selection);
 
-		if (nextState === -1) {
-			break;
-		}
+    if (nextState === -1) {
+      break;
+    }
 
-		tweet += " " + nextState;
-	}
+    tweet += " " + nextState;
+  }
 
-	tweet = setFirstLetterAsUpperCase(tweet);
+  tweet = setFirstLetterAsUpperCase(tweet);
 
-	if (tweet.charAt(tweet.length - 1) != '.') {
-		tweet = tweet + '.';
-	}
+  if (tweet.charAt(tweet.length - 1) != '.') {
+    tweet = tweet + '.';
+  }
 
-	for (var index = 0; index < tweet.length; index++) {
-		if (index > 0 && index != tweet.length - 1 &&
-			tweet.charAt(index - 1) == ' ' && tweet.charAt(index + 1) == ' ' &&
-			tweet.charAt(index) == 'i') {
-			tweet = setCharAt(tweet, index, 'I');
-		}
+  for (var index = 0; index < tweet.length; index++) {
+    if (index > 0 && index != tweet.length - 1 &&
+      tweet.charAt(index - 1) == ' ' && tweet.charAt(index + 1) == ' ' &&
+      tweet.charAt(index) == 'i') {
+      tweet = setCharAt(tweet, index, 'I');
+    }
 
-		if (tweet.charAt(index) == '.') {
-			tweet = tweet.substring(0, index + 1);
-			break;
-		}
-	}
+    if (tweet.charAt(index) == '.') {
+      tweet = tweet.substring(0, index + 1);
+      break;
+    }
+  }
 
-	return tweet;
+  return tweet;
 
 };
 
 function setFirstLetterAsUpperCase(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function setCharAt(str, index, chr) {
-	if (index > str.length-1) return str;
-	return str.substr(0,index) + chr + str.substr(index+1);
+  if (index > str.length-1) return str;
+  return str.substr(0,index) + chr + str.substr(index+1);
 }
 
 /**
@@ -147,30 +147,30 @@ function setCharAt(str, index, chr) {
  * @return {String}         - The next token to use in the Markov Process.
  */
 MarkovTweet.prototype.addToTweet = function(rowIndex) {
-	var currentRow = this.table[rowIndex];
+  var currentRow = this.table[rowIndex];
 
-	// No possible combination.
-	if (currentRow === undefined) {
-		return -1;
-	}
+  // No possible combination.
+  if (currentRow === undefined) {
+    return -1;
+  }
 
-	var totalChoices = currentRow.total;
-	var random = Math.floor(Math.random() * totalChoices);
+  var totalChoices = currentRow.total;
+  var random = Math.floor(Math.random() * totalChoices);
 
-	var selection = 0;
-	var index = 0;
+  var selection = 0;
+  var index = 0;
 
-	while(selection < random) {
-		selection += currentRow.values[index].count;
+  while(selection < random) {
+    selection += currentRow.values[index].count;
 
-		if (selection > random) {
-			break;
-		}
+    if (selection > random) {
+      break;
+    }
 
-		index++;
-	}
+    index++;
+  }
 
-	return currentRow.values[index].next;
+  return currentRow.values[index].next;
 };
 
 /**
@@ -180,12 +180,12 @@ MarkovTweet.prototype.addToTweet = function(rowIndex) {
  */
 MarkovTweet.prototype.findIndex = function(key) {
 
-	for (var index = 0; index < this.table.length; index++) {
+  for (var index = 0; index < this.table.length; index++) {
 
-		if (this.table[index].key === key) {
-			return index;
-		}
-	}
+    if (this.table[index].key === key) {
+      return index;
+    }
+  }
 
-	return -1;
+  return -1;
 };
