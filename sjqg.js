@@ -212,6 +212,12 @@ generator.addData([
   "It will go down in history as a turning point for the music industry. This is landmark stuff. I can't overestimate it!",
   "Because I'm the CEO, and I think it can be done.",
   "Click. Boom. Amazing!",
-  "Remembering that I'll be dead soon is the most important tool I've ever encountered to help me make the big choices in life. Because almost everything - all external expectations, all pride, all fear of embarrassment or failure - these things just fall away in the face of death, leaving only what is truly important. Remembering that you are going to die is the best way I know to avoid the trap of thinking you have something to lose. You are already naked. There is no reason not to follow your heart."
+  "Remembering that I'll be dead soon is the most important tool I've ever encountered to help me make the big choices in life. Because almost everything - all external expectations, all pride, all fear of embarrassment or failure - these things just fall away in the face of death, leaving only what is truly important. Remembering that you are going to die is the best way I know to avoid the trap of thinking you have something to lose. You are already naked. There is no reason not to follow your heart.",
+  "Innovation has nothing to do with how many R&D dollars you have. When Apple came up with the Mac, IBM was spending at least 100 times more on R&D. It's not about money. It's about the people you have, how you're led, and how much you get it.",
+  "I wish developing great products was as easy as writing a check. If that was the case, Microsoft would have great products.",
+  "You know, you keep on innovating, you keep on making better stuff. And if you always want the latest and greatest, then you have to buy a new iPod at least once a year.",
+  "I'm the only person I know that's lost a quarter of a billion dollars in one year.... It's very character-building.",
+  "Microsoft has had two goals. One was to copy the Mac and the other was to copy Lotus' success in the spreadsheet. And over the course of the last 10 years, Microsoft accomplished both of those goals. And now they are completely lost.",
+  "They were able to copy the Mac because the Mac was frozen in time. The Mac didn't change much for the last 10 years. It changed maybe 10 percent. It was a sitting duck. It's amazing that it took Microsoft 10 years to copy something that was a sitting duck. Apple, unfortunately, doesn't deserve too much sympathy. They invested hundreds and hundreds of millions of dollars into R&D, but very little came out. They produced almost no new innovation since the original Mac itself."
 ]);
 generateQuote();
