@@ -50,7 +50,7 @@ function updateDomQuote(quote)
   document.getElementById("quote").innerHTML = quote;
 }
 
-function addCanvas(quote, canvas, d1, d2, downoad, image)
+function addCanvas(quote, canvas, d1, d2, download, image)
 {
   var c = document.getElementById(canvas);
   var ctx = c.getContext("2d");
