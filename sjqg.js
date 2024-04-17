@@ -62,19 +62,17 @@ function addCanvas(quote, canvas, d1, d2, downoad, image)
     wrapText(ctx, quote, 55, 120, d1, 20);
     ctx.font = "bold 24px " + fonts;
     ctx.fillText("-Steve Jobs", 50, 280);
-    ctx.font = "bold 12px " + fonts;
-    ctx.fillText("stevejobsquotegenerator.com", d2, 480);
 
     var rawImageData = c.toDataURL("image/png;base64");
     rawImageData = rawImageData.replace("image/png", "image/octet-stream");
-    document.getElementById(downoad).setAttribute("href", rawImageData);
+    document.getElementById(download).setAttribute("href", rawImageData);
   };
   img.src = image;
 }
 
 function updateTweetLink(quote)
 {
-  var href = "https://twitter.com/share?url=http://stevejobsquotegenerator.com&text=" + encodeURIComponent(quote) + " -Steve Jobs";
+  var href = "https://twitter.com/share?url=" + window.location.href + "&text=" + encodeURIComponent(quote) + " -Steve Jobs";
   document.getElementById("tweet").setAttribute("href", href);
 }
 
