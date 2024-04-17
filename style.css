@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  background-image: url("http://stevejobsquotegenerator.com/steve-jobs.png");
+  background-image: url("steve-jobs.png");
   background-repeat: no-repeat;
   background-position: bottom right;
   margin: 0;
@@ -54,10 +54,6 @@ body {
   position: relative;
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-#info_toggler {
-  left: 60px;
 }
 
 #twitter:hover,
@@ -244,11 +240,7 @@ body {
     width: 40px;
   }
 
-  #info_toggler {
-    left: 80px;
-  }
-
   #info {
-    left: 150px;
+    left: 90px;
   }
 }
